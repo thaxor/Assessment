@@ -1,0 +1,23 @@
+http://json2csharp.com/
+
+https://andrewlock.net/model-binding-json-posts-in-asp-net-core/
+https://exceptionnotfound.net/asp-net-core-demystified-model-binding-in-mvc/
+
+Migrations:
+
+	In Visual Studio, you can use the Package Manager Console to apply pending migrations to the database:
+
+	PM> Update-Database
+	Alternatively, you can apply pending migrations from a command prompt at your project directory:
+
+	> dotnet ef database update
+
+https://docs.microsoft.com/en-us/aspnet/core/security/authorization/secure-data
+
+https://www.youtube.com/watch?v=CJIrmzHoY_M
+https://www.youtube.com/watch?v=ZWCRgDGgbPU
+
+Claim vs Role based authentication
+https://stackoverflow.com/questions/22814023/role-based-access-control-rbac-vs-claims-based-access-control-cbac-in-asp-n
+
+https://stackoverflow.com/questions/42471866/how-to-create-roles-in-asp-net-core-and-assign-them-to-users
