@@ -52,10 +52,12 @@ namespace Assessment.Services
   
         private static async Task CreateUsers(UserManager<ApplicationUser> userManager)
         {
-            await CreateUser(userManager, _adminUserName, _adminEmail, _password);
-            await CreateUser(userManager, _workerUserName, _workerEmail, _password);
-            await CreateUser(userManager, _reviewerUserName, _reviewerEmail, _password);
-            await CreateUser(userManager, _approverUserName, _approverEmail, _password);
+            //WTFFFF
+            //https://stackoverflow.com/questions/24214840/cannot-login-on-asp-net-identity-2-site-after-programmatic-user-creation
+            await CreateUser(userManager, _adminEmail, _adminEmail, _password);
+            await CreateUser(userManager, _workerEmail, _workerEmail, _password);
+            await CreateUser(userManager, _reviewerEmail, _reviewerEmail, _password);
+            await CreateUser(userManager, _approverEmail, _approverEmail, _password);
         }
 
         private static async Task CreateRole(RoleManager<IdentityRole> roleManager, string roleName)
