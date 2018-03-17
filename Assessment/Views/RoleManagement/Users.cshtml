@@ -1,0 +1,42 @@
+﻿@model List<ApplicationUser>
+
+@{
+ViewData["Title"] = "Users";
+}
+
+<h2>Users</h2>
+<h4>Associate your users.</h4>
+<hr />
+
+@foreach(var user in Model){
+<div class="form-horizontal" style="margin-bottom:40px;">
+
+    <div class="form-group">
+        <label class="col-sm-1 control-label">UserName:</label>
+        <div class="col-sm-5">
+            <span class="form-control" disabled>@user.UserName</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-1 control-label">Roles:</label>
+        <div class="col-sm-5">
+            <select class="form-control" multiple>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-1 control-label"></label>
+        <div class="col-sm-5">
+            <input type="button" class="btn btn-primary" value="Submit" />
+        </div>
+
+    </div>
+
+</div>
+}
