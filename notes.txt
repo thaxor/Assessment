@@ -34,3 +34,6 @@ https://www.locktar.nl/programming/net-core/seed-database-users-roles-dotnet-cor
 
 bootstrap 3 docs:
 https://getbootstrap.com/docs/3.3/css/
+
+razor syntax
+https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor

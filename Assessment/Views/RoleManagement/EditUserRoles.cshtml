@@ -1,0 +1,44 @@
+﻿@model Assessment.Models.RoleManagementViewModels.EditUserRolesViewModel
+@{
+    ViewData["Title"] = "Edit User Roles";
+}
+
+<h2>Edit User Roles</h2>
+
+<div class="form-horizontal" style="margin-bottom:40px;">
+
+    <div class="form-group">
+        <label class="col-sm-1 control-label">UserName:</label>
+        <div class="col-sm-5">
+            <span class="form-control" disabled>@Model.User.UserName</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-1 control-label">Roles:</label>
+        <div class="col-sm-5">
+            <select class="form-control" multiple>
+                @foreach (var role in Model.ApplicationRoles)
+                {
+                    @if (Model.UserRoles.Contains(role))
+                    {
+                        <option selected>@role</option>
+                    }
+                    else
+                    {
+                        <option>@role</option>
+                    }
+
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-1 control-label"></label>
+        <div class="col-sm-5">
+            <input type="button" class="btn btn-primary" value="Submit" />
+        </div>
+    </div>
+
+</div>
