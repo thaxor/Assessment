@@ -1,0 +1,36 @@
+﻿@model List<ApplicationUser>
+
+    @{
+ViewData["Title"] = "Users";
+    }
+
+    @section Scripts{
+        <script>
+            $(function () {
+                
+            });
+        </script>
+    }
+    <h2>Users</h2>
+    <h4>Associate your users.</h4>
+    <hr />
+    @foreach(var user in Model){
+    <div class="form-horizontal" style="margin-bottom:40px;">
+
+        <div class="form-group">
+            <label class="col-sm-1 control-label">UserName:</label>
+            <div class="col-sm-5">
+                <span class="form-control" disabled>@user.UserName</span>
+            </div>
+            <div class="col-sm-2">
+                <a asp-controller="RoleManagement"
+                   asp-action="EditUserRoles"
+                   asp-route-userId="@user.Id"
+                   class="btn btn-primary">
+                    Edit
+                </a>
+            </div>
+        </div>
+
+    </div>
+}
