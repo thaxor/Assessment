@@ -31,3 +31,6 @@ https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro#add-code-to-initi
 In older tutorials, you may see similar code in the Configure method in Startup.cs. We recommend that you use the Configure method only to set up the request pipeline.Application startup code belongs in the Main method.
 
 https://www.locktar.nl/programming/net-core/seed-database-users-roles-dotnet-core-2-0-ef/
+
+bootstrap 3 docs:
+https://getbootstrap.com/docs/3.3/css/
