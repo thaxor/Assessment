@@ -1,11 +1,20 @@
-﻿namespace Assessment.Data
+﻿using Assessment.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Assessment.Data
 {
     public class Case
     {
         public int CaseId { get; set; }
         public string Message { get; set; }
-        public string WorkerId { get; set; }
-        public string ReviewerId { get; set; }
-        public string ApproverId { get; set; }
+
+        [ForeignKey("WorkerForeignKey")]
+        public virtual ApplicationUser Worker { get; set; }
+
+        [ForeignKey("ReviewerForeignKey")]
+        public virtual ApplicationUser Reviewer { get; set; }
+
+        [ForeignKey("ApproverForeignKey")]
+        public virtual ApplicationUser Approver { get; set; }
     }
 }

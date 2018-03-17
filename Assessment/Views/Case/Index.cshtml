@@ -1,7 +1,32 @@
-﻿
+﻿@model Assessment.Models.CaseViewModels.CaseListViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Case Index</h2>
+<a asp-controller="Case" asp-action="AddCase" class="btn btn-success"> Add case </a>
+<br/><br/>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#newCases">New Cases</a></li>
+    <li><a data-toggle="tab" href="#approval">Approval</a></li>
+    <li><a data-toggle="tab" href="#completed">Completed</a></li>
+</ul>
 
+<div class="tab-content">
+
+
+
+    <div id="newCases" class="tab-pane active">
+        @Html.Partial("_CasePartial", Model.NeedReview,
+             new ViewDataDictionary(this.ViewData) { { "ButtonMessage", "Mark reviewed" }, { "Action", "ReviewCase"} })
+
+    </div>
+    <div id="approval" class="tab-pane">
+        @Html.Partial("_CasePartial", Model.NeedApproval,
+             new ViewDataDictionary(this.ViewData) { { "ButtonMessage", "Mark approved" }, { "Action", "ApproveCase"} })
+    </div>
+    <div id="completed" class="tab-pane">
+        @Html.Partial("_CasePartial", Model.Completed,
+             new ViewDataDictionary(this.ViewData) { { "ButtonMessage", "" }, { "Action", ""} })
+    </div>
+</div>
