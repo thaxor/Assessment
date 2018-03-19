@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assessment.Models;
 using Assessment.Models.RoleManagementViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,10 +17,7 @@ namespace Assessment.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger _logger;
 
-        public RoleManagementController(
-            RoleManager<IdentityRole> roleManager,
-          UserManager<ApplicationUser> userManager,
-          ILogger<ManageController> logger)
+        public RoleManagementController( RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ILogger<ManageController> logger)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -31,6 +29,7 @@ namespace Assessment.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Users()
         {
             var users = _userManager.Users.ToList();
@@ -39,6 +38,7 @@ namespace Assessment.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditUserRoles([FromQuery] string userId)
         {
             //find the user
@@ -57,6 +57,7 @@ namespace Assessment.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditUserRoles([FromForm] EditUserRolesViewModel model)
         {
             //find the user
