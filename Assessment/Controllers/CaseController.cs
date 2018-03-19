@@ -8,6 +8,7 @@ using Assessment.Models.CaseViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assessment.Controllers
 {
@@ -25,10 +26,12 @@ namespace Assessment.Controllers
         [Authorize(Roles = "Worker,Reviewer,Approver")]
         public IActionResult Index()
         {
+            var caseQuery = _context.Cases.Include(c => c.Comments).Include(c => c.Worker);
+
             var model = new CaseListViewModel();
-            model.NeedReview = _context.Cases.Where(c => c.Reviewer == null).ToList();
-            model.NeedApproval = _context.Cases.Where(c => c.Reviewer != null && c.Approver == null).ToList();
-            model.Completed = _context.Cases.Where(c => c.Approver != null).ToList();
+            model.NeedReview = caseQuery.Where(c => c.Reviewer == null).ToList();
+            model.NeedApproval = caseQuery.Where(c => c.Reviewer != null && c.Approver == null).ToList();
+            model.Completed = caseQuery.Where(c => c.Approver != null).ToList();
 
             return View(model);
         }
@@ -92,6 +95,13 @@ namespace Assessment.Controllers
         [Authorize(Roles = "Worker,Reviewer,Approver")]
         public IActionResult AddComment(AddCommentViewModel model)
         {
+            var caseData = _context.Cases.First(c => c.CaseId == model.CaseId);
+
+            var comment = new Comment();
+            comment.CommentText = model.Comment;
+            comment.Case = caseData;
+            _context.Add(comment);
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }

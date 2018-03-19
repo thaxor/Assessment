@@ -3,41 +3,58 @@
 
 @foreach (var c in Model)
 {
-    <div class="form-horizontal" style="margin-bottom:40px;">
-        <div class="form-group row">
-            <br />
-            <label class="col-md-1 control-label">Case id:</label>
-            <div class="col-md-2">
-                <span class="form-control" disabled>@c.CaseId</span>
-            </div>
+<div class="form-horizontal" style="margin-bottom:40px;">
+    <div class="form-group row">
+        <br />
+        <label class="col-md-1 control-label">Case id:</label>
+        <div class="col-md-2">
+            <span class="form-control" disabled>@c.CaseId</span>
         </div>
-        <div class="form-group row">
-            <label class="col-md-1 control-label">Message:</label>
-            <div class="col-md-10">
-                <p>@c.Message</p>
-            </div>
-        </div>
-        @if (!string.IsNullOrEmpty(ViewData["Action"].ToString()))
-        {
-            <div class="form-group row">
-                <label class="col-md-1 control-label"></label>
-                <div class="col-md-6">
-
-                    <a asp-controller="Case"
-                       asp-action="@ViewData["Action"]"
-                       asp-route-caseId="@c.CaseId"
-                       class="btn btn-primary">
-                        @ViewData["ButtonMessage"]
-                    </a>
-
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@c.CaseId.ToString()addMessageModal">
-                        Add message
-                    </button>
-
-                </div>
-            </div>
-        }
     </div>
+    <div class="form-group row">
+        <label class="col-md-1 control-label">Created by:</label>
+        <div class="col-md-6">
+            <span class="form-control" disabled>@c.Worker.UserName</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-1 control-label">Message:</label>
+        <div class="col-md-10">
+            <p>@c.Message</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-1 control-label">Comments:</label>
+        <div class="col-md-10">
+            @foreach (var comment in c.Comments)
+            {
+                <p>@comment.CommentText</p>
+            }
+        </div>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewData["Action"].ToString()))
+    {
+        <div class="form-group row">
+            <label class="col-md-1 control-label"></label>
+            <div class="col-md-6">
+
+                <a asp-controller="Case"
+                   asp-action="@ViewData["Action"]"
+                   asp-route-caseId="@c.CaseId"
+                   class="btn btn-primary">
+                    @ViewData["ButtonMessage"]
+                </a>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@c.CaseId.ToString()addMessageModal">
+                    Add message
+                </button>
+
+            </div>
+        </div>
+    }
+</div>
+
     <form asp-controller="Case" asp-action="AddComment" method="post">
         <div class="modal fade" role="dialog" id="@c.CaseId.ToString()addMessageModal">
             <div class="modal-dialog">
