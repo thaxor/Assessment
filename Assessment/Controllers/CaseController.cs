@@ -22,7 +22,7 @@ namespace Assessment.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Admin,Worker,Reviewer,Approver")]
+        [Authorize(Roles = "Worker,Reviewer,Approver")]
         public IActionResult Index()
         {
             var model = new CaseListViewModel();
@@ -84,6 +84,14 @@ namespace Assessment.Controllers
             caseToReview.Approver = user;
 
             _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Worker,Reviewer,Approver")]
+        public IActionResult AddComment(AddCommentViewModel model)
+        {
 
             return RedirectToAction("Index");
         }

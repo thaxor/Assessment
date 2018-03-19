@@ -5,7 +5,7 @@
 
 <h2>Case Index</h2>
 <a asp-controller="Case" asp-action="AddCase" class="btn btn-success"> Add case </a>
-<br/><br/>
+<br /><br />
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#newCases">New Cases</a></li>
     <li><a data-toggle="tab" href="#approval">Approval</a></li>
@@ -14,19 +14,39 @@
 
 <div class="tab-content">
 
-
-
     <div id="newCases" class="tab-pane active">
         @Html.Partial("_CasePartial", Model.NeedReview,
-             new ViewDataDictionary(this.ViewData) { { "ButtonMessage", "Mark reviewed" }, { "Action", "ReviewCase"} })
+                  new ViewDataDictionary(this.ViewData) { { "ButtonMessage", "Mark reviewed" }, { "Action", "ReviewCase" } })
 
     </div>
     <div id="approval" class="tab-pane">
         @Html.Partial("_CasePartial", Model.NeedApproval,
-             new ViewDataDictionary(this.ViewData) { { "ButtonMessage", "Mark approved" }, { "Action", "ApproveCase"} })
+                  new ViewDataDictionary(this.ViewData) { { "ButtonMessage", "Mark approved" }, { "Action", "ApproveCase" } })
     </div>
     <div id="completed" class="tab-pane">
         @Html.Partial("_CasePartial", Model.Completed,
-             new ViewDataDictionary(this.ViewData) { { "ButtonMessage", "" }, { "Action", ""} })
+                  new ViewDataDictionary(this.ViewData) { { "ButtonMessage", "" }, { "Action", "" } })
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="addMessageModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Add comment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">Comment: </label>
+                    <input id="caseComment" type="text" class="control-label" />
+                    <input id="caseComment" type="text" class="control-label" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" id="saveComment" class="btn btn-primary">Save comment</button>
+            </div>
+        </div>
     </div>
 </div>
