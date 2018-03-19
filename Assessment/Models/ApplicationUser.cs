@@ -19,5 +19,7 @@ namespace Assessment.Models
 
         [InverseProperty("Approver")]
         public virtual ICollection<Case> ApproverCases { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Assessment.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Assessment.Data
@@ -16,5 +17,7 @@ namespace Assessment.Data
 
         [ForeignKey("ApproverForeignKey")]
         public virtual ApplicationUser Approver { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

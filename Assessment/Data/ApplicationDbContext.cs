@@ -34,6 +34,14 @@ namespace Assessment.Data
             builder.Entity<Case>()
                 .HasOne(c => c.Approver)
                 .WithMany(u => u.ApproverCases);
+
+            builder.Entity<Case>()
+                .HasMany(c => c.Comments);
+
+            builder.Entity<Comment>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Comments);
+
         }
         public DbSet<Case> Cases { get; set; }
 
