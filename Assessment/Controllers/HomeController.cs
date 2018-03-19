@@ -9,6 +9,7 @@ using Assessment.Data;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
+using Assessment.Models.HomeViewModels;
 
 namespace Assessment.Controllers
 {
@@ -26,16 +27,19 @@ namespace Assessment.Controllers
         public IActionResult Index()
         {
             var connectionString = _configuration.GetConnectionString("DefaultConnection");
+            var model = new IndexViewModel();
 
             IEnumerable<UserCaseLoad> result;
 
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                result = connection.Query<UserCaseLoad>("spUserCaseLoadReport", new { }, commandType: System.Data.CommandType.StoredProcedure);
+                model.UserCaseLoadReport = connection.Query<UserCaseLoad>("spUserCaseLoadReport", new { }, commandType: System.Data.CommandType.StoredProcedure);
+
+                model.CaseStatePercentageReport = connection.Query<CaseStatePercentage>("spCaseStatePercentages", new { }, commandType: System.Data.CommandType.StoredProcedure);
             };
 
-            return View(result);
+            return View(model);
         }
 
         public IActionResult About()

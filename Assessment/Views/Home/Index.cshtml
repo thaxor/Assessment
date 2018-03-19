@@ -1,27 +1,53 @@
-﻿@model IEnumerable<Assessment.Data.UserCaseLoad>
+﻿@model Assessment.Models.HomeViewModels.IndexViewModel
 
 @{
     ViewData["Title"] = "Home Page";
 }
 <h1>Case management dashboard</h1>
+
 <h3>User case load report</h3>
 <table class="table table-condensed table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th>UserName</th>
+            <th>User name</th>
             <th>Worker cases</th>
             <th>Reviewed cases</th>
             <th>Approved cases</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in Model)
+        @foreach (var user in Model.UserCaseLoadReport)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.WorkerCases</td>
+                <td>@user.ReviewedCases</td>
+                <td>@user.ApprovedCases</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Case state percentages by user</h3>
+<table class="table table-condensed table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>User name</th>
+            <th>% user cases reviewed</th>
+            <th>% user cases approved</th>
+            <th>% user cases reviewed of total</th>
+            <th>% user cases approved of total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.CaseStatePercentageReport)
         {
         <tr>
             <td>@user.UserName</td>
-            <td>@user.WorkerCases</td>
-            <td>@user.ReviewedCases</td>
-            <td>@user.ApprovedCases</td>
+            <td>@user.PercentUserCasesReviewed</td>
+            <td>@user.PercentUserCasesApproved</td>
+            <td>@user.PercentUserTotalCasesReviewed</td>
+            <td>@user.PercentUserTotalCasesApproved</td>
         </tr>
         }
     </tbody>
